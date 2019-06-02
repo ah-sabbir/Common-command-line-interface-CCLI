@@ -37,7 +37,17 @@ After install close your terminal and open it again
 ## Develpoment
 **Created By,** 
 _Farhan Sadik_ <br>
-**Algorithm by** 
+**Design by** 
 _Ahmmed Sabbir_ <br>
 **Development Under** 
 _Square Development Group_
+
+
+  * Simple to use
+  * Fast and beautiful design
+  * We used material design & UX library to build this application
+  * We used MVC design pattern
+  * Password hashed
+
+Testing v 1
+
