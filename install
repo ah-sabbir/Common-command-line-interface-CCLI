@@ -1,0 +1,77 @@
+#!/bin/bash
+
+set import busybox 
+set import bash from busybox
+set import git 
+
+script_version="0.1.08";
+engine_version="0.1 Alpha";
+
+# define variable 
+red='\033[1;91m'; deep_green='\033[0;32m'; green='\033[1;92m'; yellow='\033[1;93m'; blue='\033[1;94m'; white='\033[1;97m'; stop='\e[0m';
+arch_configuration=arch.cfg
+debian_configuration=deb.cfg
+pc_config=pc_config.cfg
+
+# log files 
+log=/tmp/data.log
+
+function FileOperation() {
+
+	# only for bash 
+
+	if printf "Creating Files        : "; then {
+		# creating bashrc alias 
+		if ls $pc_config >> $log; then {
+			printf "OK\n";
+		}; else {
+			if printf "Creating Files        : "; then touch $pc_config && printf "OK\n"; fi
+		}; fi
+	}; fi
+}
+function ArchOperation() {
+	if printf "Cloning Configuration : "; then {
+		if less $arch_configuration >> $pc_config; then {
+			printf "Done\n";	
+		}; fi
+	}; fi;
+}
+function DebianOperation() {
+	if printf "Cloning Configuration : "; then {
+		if less $debian_configuration >> $pc_config; then {
+			printf "Done\n";	
+		}; fi
+	}; fi;	
+}
+function CheckDistro() {
+	printf "Searching for distro  : "
+	if lsb_release -i | grep 'Antergos' >> $log; then {
+		printf "Found\n"; ArchOperation;
+	}; elif lsb_release -i | grep 'LinuxMint' >> $log; then {
+		printf "Found\n"; DebianOperation;
+	}; elif lsb_release -i | grep 'ManjaroLinux' >> $log; then {
+		printf "Found\n"; ArchOperation;
+	}; elif lsb_release -i | grep 'Ubuntu' >> $log; then {
+		printf "Found\n"; DebianOperation;
+	}; else {
+		sleep 0.5; printf "Failed\n";
+	}; fi
+}
+
+main() {
+	printf "$deep_green" && printf "CCLI$yellow v$script_version\n$red";
+	figlet "CCLi" && printf "\n$stop";
+	FileOperation && CheckDistro;
+	printf "Setting up Files      : ";
+	if less $pc_config >> ~/.bashrc; then printf "OK\n"; fi;
+}
+
+# main logic
+while true
+	do
+		if main; then sleep 0; fi && exit 0
+done
+exit 0 
+
+# A Program By, Farhan Sadik 
+# Copyright (C) Square Development Group 
