@@ -2,7 +2,6 @@
 
 ## Installation
 
-## <<<<<<< master
 > Note : Before use CCLI please install `git` on your machine.
 
 Copy and paste those commands on your terminal 
@@ -28,7 +27,9 @@ After install close your terminal and open it again
 
 ## Support 
  1. Supported Arch Linux and Arch Linux Based Distro
+     * tested on **manjaro** and **antergos**
  2. Supported Debian and Debian Based Distro
+     * tested on **ubuntu** and **linux mint**
 
 ## Develpoment
 **Created By,** 
@@ -37,12 +38,3 @@ _Farhan Sadik_ <br>
 _Ahmmed Sabbir_ <br>
 **Development Under** 
 _Square Development Group_
-## =======
-  * Simple to use
-  * Fast and beautiful design
-  * We used material design & UX library to build this application
-  * We used MVC design pattern
-  * Password hashed
-
-Testing v 1
-## >>>>>>> master
