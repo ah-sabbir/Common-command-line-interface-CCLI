@@ -4,66 +4,78 @@ set import busybox
 set import bash from busybox
 set import git 
 
-script_version="0.1.08";
-engine_version="0.1 Alpha";
+script_version="0.1.09 Alpha";
 
 # define variable 
 red='\033[1;91m'; deep_green='\033[0;32m'; green='\033[1;92m'; yellow='\033[1;93m'; blue='\033[1;94m'; white='\033[1;97m'; stop='\e[0m';
 arch_configuration=arch.cfg
 debian_configuration=deb.cfg
-pc_config=pc_config.cfg
+pc_config=/tmp/pc_config.cfg
+help=help.txt
+config=~/.config/ccli/
 
 # log files 
 log=/tmp/data.log
 
 function FileOperation() {
-
-	# only for bash 
-
-	if printf "Creating Files        : "; then {
-		# creating bashrc alias 
-		if ls $pc_config >> $log; then {
-			printf "OK\n";
+	if printf "$yellow" && printf "Creating Files        : $red"; then {
+		touch $pc_config && printf "Done\n$stop"; 
+	}; fi
+	if printf "$yellow" && printf "Creating Folder       : $red"; then {
+		if ls ~/.config/ccli >> $log; then {
+			printf "Done\n";
 		}; else {
-			if printf "Creating Files        : "; then touch $pc_config && printf "OK\n"; fi
+			if printf "$yellow" && printf "Creating Folder       : $red"; then {
+				mkdir ~/.config/ccli && printf "Done\n$stop"; 
+			}; fi
 		}; fi
 	}; fi
 }
 function ArchOperation() {
-	if printf "Cloning Configuration : "; then {
+	if printf "$yellow" && printf "Cloning Configuration : $red"; then {
 		if less $arch_configuration >> $pc_config; then {
-			printf "Done\n";	
+			printf "Done$stop\n";	
 		}; fi
 	}; fi;
 }
 function DebianOperation() {
-	if printf "Cloning Configuration : "; then {
+	if printf "$yellow" && printf "Cloning Configuration : $red"; then {
 		if less $debian_configuration >> $pc_config; then {
-			printf "Done\n";	
+			printf "Done$stop\n";	
 		}; fi
 	}; fi;	
 }
-function CheckDistro() {
-	printf "Searching for distro  : "
+function DistroOperation() {
+	printf "$yellow" && printf "Searching for distro  : $red"
 	if lsb_release -i | grep 'Antergos' >> $log; then {
-		printf "Found\n"; ArchOperation;
+		printf "Antergos Linux\n"; ArchOperation;
 	}; elif lsb_release -i | grep 'LinuxMint' >> $log; then {
-		printf "Found\n"; DebianOperation;
+		printf "Linux Mint\n"; DebianOperation;
 	}; elif lsb_release -i | grep 'ManjaroLinux' >> $log; then {
-		printf "Found\n"; ArchOperation;
+		printf "Manjaro Linux\n"; ArchOperation;
 	}; elif lsb_release -i | grep 'Ubuntu' >> $log; then {
-		printf "Found\n"; DebianOperation;
+		printf "Ubuntu\n"; DebianOperation;
 	}; else {
 		sleep 0.5; printf "Failed\n";
-	}; fi
+	}; fi; printf "$stop"
 }
 
 main() {
-	printf "$deep_green" && printf "CCLI$yellow v$script_version\n$red";
-	figlet "CCLi" && printf "\n$stop";
-	FileOperation && CheckDistro;
-	printf "Setting up Files      : ";
-	if less $pc_config >> ~/.bashrc; then printf "OK\n"; fi;
+	printf "$green" && printf "CCLI$yellow v$script_version$red";
+	echo "
+ ____ ____ _     _ 
+ / ___/ ___| |   (_)
+| |  | |   | |   | |
+| |__| |___| |___| |
+ \____\____|_____|_|
+	"; printf "$stop";
+	FileOperation && DistroOperation;
+	printf "$yellow" && printf "Settingup Files       : $red";
+	if less $pc_config >> ~/.bashrc; then printf "Done\n$stop"; fi;
+	printf "$yellow" && printf "Settingup Folder      : $red";
+	if cp -rfv $help $config >> $log; then printf "Done\n$stop"; fi;
+	printf "$yellow" && printf "Settingup Perrmision  : $red";
+	if cd $config; then chmod +x $help && printf "Done\n$stop"; fi;
 }
 
 # main logic

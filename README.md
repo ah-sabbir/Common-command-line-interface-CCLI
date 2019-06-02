@@ -25,9 +25,14 @@ After install close your terminal and open it again
  4. **upgrade** ~ to upgrade all of package <br>
  example ~ type ```upgrade``` and hit enter 
 
+ 5. **help** ~ for get help <br>
+ example ~ type ```help``` and hit enter  
+ 
 ## Support 
  1. Supported Arch Linux and Arch Linux Based Distro
+     * tested on **manjaro** and **antergos**
  2. Supported Debian and Debian Based Distro
+     * tested on **ubuntu** and **linux mint**
 
 ## Develpoment
 **Created By,** 
@@ -36,6 +41,7 @@ _Farhan Sadik_ <br>
 _Ahmmed Sabbir_ <br>
 **Development Under** 
 _Square Development Group_
+
 
   * Simple to use
   * Fast and beautiful design
