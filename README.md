@@ -12,15 +12,6 @@ cd Common-command-line-interface-CCLI
 ```
 After install close your terminal and open it again
 
-## Update CCLI
-Copy and paste those commands on your terminal 
-```
-cd Common-command-line-interface-CCLI
-git pull
-./install
-```
-After update please close your terminal and open it again
-
 ## Keywords and Usages
  1. **install** ~ to install a package  <br>
  example ~ ```install <package-name>``` 
@@ -46,7 +37,17 @@ After update please close your terminal and open it again
 ## Develpoment
 **Created By,** 
 _Farhan Sadik_ <br>
-**Algorithm by** 
+**Design by** 
 _Ahmmed Sabbir_ <br>
 **Development Under** 
 _Square Development Group_
+
+
+  * Simple to use
+  * Fast and beautiful design
+  * We used material design & UX library to build this application
+  * We used MVC design pattern
+  * Password hashed
+
+Testing v 1
+
