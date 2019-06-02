@@ -2,7 +2,6 @@
 
 ## Installation
 
-## <<<<<<< master
 > Note : Before use CCLI please install `git` on your machine.
 
 Copy and paste those commands on your terminal 
@@ -37,7 +36,7 @@ _Farhan Sadik_ <br>
 _Ahmmed Sabbir_ <br>
 **Development Under** 
 _Square Development Group_
-## =======
+
   * Simple to use
   * Fast and beautiful design
   * We used material design & UX library to build this application
@@ -45,4 +44,4 @@ _Square Development Group_
   * Password hashed
 
 Testing v 1
-## >>>>>>> master
+
