@@ -4,17 +4,17 @@ set import busybox
 set import bash from busybox
 set import git 
 
-script_version="0.1.07";
+script_version="0.1.08";
 engine_version="0.1 Alpha";
 
 # define variable 
 red='\033[1;91m'; deep_green='\033[0;32m'; green='\033[1;92m'; yellow='\033[1;93m'; blue='\033[1;94m'; white='\033[1;97m'; stop='\e[0m';
-bashrc_alias=.bashrc.aliases;
 arch_configuration=arch.cfg
 debian_configuration=deb.cfg
+pc_config=pc_config.cfg
 
 # log files 
-log=data.log
+log=/tmp/data.log
 
 function FileOperation() {
 
@@ -22,23 +22,23 @@ function FileOperation() {
 
 	if printf "Creating Files        : "; then {
 		# creating bashrc alias 
-		if ls $bashrc_alias >> $log; then {
+		if ls $pc_config >> $log; then {
 			printf "OK\n";
 		}; else {
-			if printf "Creating Files        : "; then touch $bashrc_alias && printf "OK\n"; fi
+			if printf "Creating Files        : "; then touch $pc_config && printf "OK\n"; fi
 		}; fi
 	}; fi
 }
 function ArchOperation() {
 	if printf "Cloning Configuration : "; then {
-		if less $arch_configuration >> $bashrc_alias; then {
+		if less $arch_configuration >> $pc_config; then {
 			printf "Done\n";	
 		}; fi
 	}; fi;
 }
 function DebianOperation() {
 	if printf "Cloning Configuration : "; then {
-		if less $debian_configuration >> $bashrc_alias; then {
+		if less $debian_configuration >> $pc_config; then {
 			printf "Done\n";	
 		}; fi
 	}; fi;	
@@ -61,14 +61,15 @@ function CheckDistro() {
 main() {
 	printf "$deep_green" && printf "CCLI$yellow v$script_version\n$red";
 	figlet "CCLi" && printf "\n$stop";
+	FileOperation && CheckDistro;
+	printf "Setting up Files      : ";
+	if less $pc_config >> ~/.bashrc; then printf "OK\n"; fi;
 }
 
 # main logic
 while true
 	do
-		# main # wait for user input
-		# show_menu # display memu
-		if main; then FileOperation && CheckDistro; fi && exit 0
+		if main; then sleep 0; fi && exit 0
 done
 exit 0 
 
