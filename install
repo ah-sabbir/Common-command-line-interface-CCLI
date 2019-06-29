@@ -1,49 +1,66 @@
 #!/bin/bash
 
-set import busybox 
-set import bash from busybox
-set import git 
-
-script_version="0.1.09 Alpha";
-
-# define variable 
+# define variable
 red='\033[1;91m'; deep_green='\033[0;32m'; green='\033[1;92m'; yellow='\033[1;93m'; blue='\033[1;94m'; white='\033[1;97m'; stop='\e[0m';
 arch_configuration=arch.cfg
 debian_configuration=deb.cfg
-pc_config=/tmp/pc_config.cfg
+termux_configuration=termux.cfg
 help=help.txt
-config=~/.config/ccli/
+script_version="0.1.10 Beta";
 
-# log files 
-log=/tmp/data.log
+# log files
+log=~/.config/ccli/data.log  # edited for test
+config=~/.config/ccli/
+# pc_config=/tmp/pc_config.cfg 			# removing for test
+pc_config=~/.config/ccli/pc_config.cfg
+
+function alt_file_operation() {
+
+	# test mode
+
+	if printf "$yellow" && printf "Creating Folder       : $red"; then {
+		if mkdir ~/.config/ccli; then {
+			printf "Done\n$stop"
+		}; fi
+	}; fi
+
+	if printf "$yellow" && printf "Creating Files        : $red"; then {
+		touch $pc_config && printf "Done\n$stop";
+	}; fi
+}
 
 function FileOperation() {
-	if printf "$yellow" && printf "Creating Files        : $red"; then {
-		touch $pc_config && printf "Done\n$stop"; 
-	}; fi
 	if printf "$yellow" && printf "Creating Folder       : $red"; then {
 		if ls ~/.config/ccli >> $log; then {
 			printf "Done\n";
 		}; else {
-			if printf "$yellow" && printf "Creating Folder       : $red"; then {
-				mkdir ~/.config/ccli && printf "Done\n$stop"; 
-			}; fi
+			mkdir ~/.config/ccli && printf "Done\n$stop";
 		}; fi
+	}; fi
+	if printf "$yellow" && printf "Creating Files        : $red"; then {
+		touch $pc_config && printf "Done\n$stop";
 	}; fi
 }
 function ArchOperation() {
 	if printf "$yellow" && printf "Cloning Configuration : $red"; then {
 		if less $arch_configuration >> $pc_config; then {
-			printf "Done$stop\n";	
+			printf "Done$stop\n";
+		}; fi
+	}; fi;
+}
+function AndroidOperation() {
+	if printf "$yellow" && printf "Cloning Configuration : $red"; then {
+		if less $termux_configuration >> $pc_config; then {
+			printf "Done$stop\n";
 		}; fi
 	}; fi;
 }
 function DebianOperation() {
 	if printf "$yellow" && printf "Cloning Configuration : $red"; then {
-		if less $debian_configuration >> $pc_config; then {
-			printf "Done$stop\n";	
+		if less $termux_configuration >> $pc_config; then {
+			printf "Done$stop\n";
 		}; fi
-	}; fi;	
+	}; fi;
 }
 function DistroOperation() {
 	printf "$yellow" && printf "Searching for distro  : $red"
@@ -55,35 +72,35 @@ function DistroOperation() {
 		printf "Manjaro Linux\n"; ArchOperation;
 	}; elif lsb_release -i | grep 'Ubuntu' >> $log; then {
 		printf "Ubuntu\n"; DebianOperation;
+	}; elif uname -a | grep 'Android' >> $log; then { # Android operation --- for test only ---
+		printf "Android\n"; AndroidOperation;
 	}; else {
 		sleep 0.5; printf "Failed\n";
 	}; fi; printf "$stop"
 }
 
 main() {
-	printf "$green" && printf "CCLI$yellow v$script_version$red";
+	printf "$green" && printf "CCLi$yellow v$script_version$red";
 	echo "
- ____ ____ _     _ 
+  ____ ____ _     _
  / ___/ ___| |   (_)
 | |  | |   | |   | |
 | |__| |___| |___| |
  \____\____|_____|_|
 	"; printf "$stop";
-	FileOperation && DistroOperation;
-	printf "$yellow" && printf "Settingup Files       : $red";
-	if less $pc_config >> ~/.bashrc; then printf "Done\n$stop"; fi;
-	printf "$yellow" && printf "Settingup Folder      : $red";
+	alt_file_operation && DistroOperation;
+
+	# FileOperation && DistroOperation; # removed for test
+	
+	printf "$yellow" && printf "Copyting Files        : $red";
+	if less $pc_config >> ~/.bashrc; then printf "Done\n$stop"; fi; # need to re modified
+	printf "$yellow" && printf "Copyting Folder       : $red";
 	if cp -rfv $help $config >> $log; then printf "Done\n$stop"; fi;
-	printf "$yellow" && printf "Settingup Perrmision  : $red";
-	if cd $config; then chmod +x $help && printf "Done\n$stop"; fi;
+	printf "$yellow" && printf "Getting Permision     : $red";
+	if cd $config; then chmod +x $help && printf "Done\n$stop"; fi; # help (chmod) - sometimes some of distro failed to run
 }
 
-# main logic
-while true
-	do
-		if main; then sleep 0; fi && exit 0
-done
-exit 0 
+main
 
-# A Program By, Farhan Sadik 
-# Copyright (C) Square Development Group 
+# A Program By, Farhan Sadik
+# Copyright (C) Square Development Group
