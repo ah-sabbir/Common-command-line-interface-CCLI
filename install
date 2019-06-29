@@ -6,35 +6,17 @@ arch_configuration=arch.cfg
 debian_configuration=deb.cfg
 termux_configuration=termux.cfg
 help=help.txt
-script_version="0.1.10 Beta";
+script_version="1.0 Stable";
 
 # log files
-log=~/.config/ccli/data.log  # edited for test
+log=~/.config/ccli/data.log
 config=~/.config/ccli/
-# pc_config=/tmp/pc_config.cfg 			# removing for test
 pc_config=~/.config/ccli/pc_config.cfg
-
-function alt_file_operation() {
-
-	# test mode
-
-	if printf "$yellow" && printf "Creating Folder       : $red"; then {
-		if mkdir ~/.config/ccli; then {
-			printf "Done\n$stop"
-		}; fi
-	}; fi
-
-	if printf "$yellow" && printf "Creating Files        : $red"; then {
-		touch $pc_config && printf "Done\n$stop";
-	}; fi
-}
 
 function FileOperation() {
 	if printf "$yellow" && printf "Creating Folder       : $red"; then {
-		if ls ~/.config/ccli >> $log; then {
-			printf "Done\n";
-		}; else {
-			mkdir ~/.config/ccli && printf "Done\n$stop";
+		if mkdir ~/.config/ccli; then {
+			printf "Done\n$stop"
 		}; fi
 	}; fi
 	if printf "$yellow" && printf "Creating Files        : $red"; then {
@@ -72,7 +54,7 @@ function DistroOperation() {
 		printf "Manjaro Linux\n"; ArchOperation;
 	}; elif lsb_release -i | grep 'Ubuntu' >> $log; then {
 		printf "Ubuntu\n"; DebianOperation;
-	}; elif uname -a | grep 'Android' >> $log; then { # Android operation --- for test only ---
+	}; elif uname -a | grep 'Android' >> $log; then {
 		printf "Android\n"; AndroidOperation;
 	}; else {
 		sleep 0.5; printf "Failed\n";
@@ -88,15 +70,12 @@ main() {
 | |__| |___| |___| |
  \____\____|_____|_|
 	"; printf "$stop";
-	alt_file_operation && DistroOperation;
 
-	# FileOperation && DistroOperation; # removed for test
-
+	FileOperation && DistroOperation;
 	printf "$yellow" && printf "Copyting Files        : $red";
-	if less $pc_config >> ~/.bashrc; then printf "Done\n$stop"; fi; # need to re modified
-
+	if less $pc_config >> ~/.bashrc; then printf "Done\n$stop"; fi;
 	printf "$yellow" && printf "Copyting Files        : $red";
-	if less $pc_config >> ~/.zshrc; then printf "Done\n$stop"; fi; # zsh support has been added
+	if less $pc_config >> ~/.zshrc; then printf "Done\n$stop"; fi;
 
 	printf "$yellow" && printf "Copyting Folder       : $red";
 	if cp -rfv $help $config >> $log; then printf "Done\n$stop"; fi;
