@@ -91,9 +91,13 @@ main() {
 	alt_file_operation && DistroOperation;
 
 	# FileOperation && DistroOperation; # removed for test
-	
+
 	printf "$yellow" && printf "Copyting Files        : $red";
 	if less $pc_config >> ~/.bashrc; then printf "Done\n$stop"; fi; # need to re modified
+
+	printf "$yellow" && printf "Copyting Files        : $red";
+	if less $pc_config >> ~/.zshrc; then printf "Done\n$stop"; fi; # zsh support has been added
+
 	printf "$yellow" && printf "Copyting Folder       : $red";
 	if cp -rfv $help $config >> $log; then printf "Done\n$stop"; fi;
 	printf "$yellow" && printf "Getting Permision     : $red";
