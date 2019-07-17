@@ -43,11 +43,3 @@ After update please close your terminal and open it again
  3. Supported Android and Android Based OS (**Termux**)
      * tested on **Android Pie** and **Android x86** 
      * Note ~ Works only with **termux** app on android
-
-## Develpoment
-**Programe By,** 
-_Farhan Sadik_ <br>
-**Designed by** 
-_Ahmmed Sabbir_ <br>
-**Development Under** 
-_Square Development Group_
