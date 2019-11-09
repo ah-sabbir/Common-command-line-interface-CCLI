@@ -2,7 +2,6 @@
 ## Common Command Line Interface
 
 ## Installation
-
 > Note 
  * Before use CCLI please install `git` on your machine.
  * This is build for `bash` only. But you can add it on `fish` and `zsh` manually.
@@ -36,13 +35,13 @@ After update please close your terminal and open it again
  example ~ ```remove <package-name>``` 
  
  3. **sync** ~ to update/sync distro repository <br>
- example ~ type ```sync``` and hit enter 
+ example ~ type ```sync```
  
  4. **upgrade** ~ to upgrade all of package <br>
- example ~ type ```upgrade``` and hit enter 
+ example ~ type ```upgrade```
 
  5. **help** ~ for get help <br>
- example ~ type ```help``` and hit enter  
+ example ~ type ```help``` 
  
  6. **clean-cache** ~ Clean up all local caches <br>
  example ~ `clean-cache` and hit enter  
@@ -56,6 +55,9 @@ After update please close your terminal and open it again
      * tested on **manjaro**, **antergos**, **arch**
  2. Supported Debian and Debian Based Distro
      * tested on **ubuntu** and **linux mint**
+ 3. Supported Android and Android Based OS (**Termux**)
+     * tested on **Android Pie** and **Android x86** 
+     * Note ~ Works only with **termux** app on android
      
 ## Not Supported 
  1. We added **openSUSE** configuration. Not installed it on `install` script. You can install **openSUSE** config manually. 
