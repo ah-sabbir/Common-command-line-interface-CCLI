@@ -44,7 +44,10 @@ After update please close your terminal and open it again
  5. **help** ~ for get help <br>
  example ~ type ```help``` and hit enter  
  
- 6. **please** ~ added for fun <br>
+ 6. **clean-cache** ~ Clean up all local caches <br>
+ example ~ `clean-cache` and hit enter  
+ 
+ 7. **please** ~ added for fun <br>
  `please` works replace of **sudo** command <br>
  example ~ `please install toilet` and hit enter 
  
