@@ -1,5 +1,14 @@
 #!/bin/bash
 
+set import busybox 
+set import bash from busybox
+set import zsh from busybox
+set import git 
+
+script_version="0.1.1 Alpha"; # 0.1.09 Alpha
+
+# define variable 
+=======
 # define variable
 red='\033[1;91m'; deep_green='\033[0;32m'; green='\033[1;92m'; yellow='\033[1;93m'; blue='\033[1;94m'; white='\033[1;97m'; stop='\e[0m';
 arch_configuration=arch.cfg
@@ -24,6 +33,7 @@ function FileOperation() {
 	}; fi
 }
 function ArchOperation() {
+	# 
 	if printf "$yellow" && printf "Cloning Configuration : $red"; then {
 		if less $arch_configuration >> $pc_config; then {
 			printf "Done$stop\n";
@@ -47,17 +57,35 @@ function DebianOperation() {
 function DistroOperation() {
 	printf "$yellow" && printf "Searching for distro  : $red"
 	if lsb_release -i | grep 'Antergos' >> $log; then {
+
+		# Arch - Antergos 
 		printf "Antergos Linux\n"; ArchOperation;
+
 	}; elif lsb_release -i | grep 'LinuxMint' >> $log; then {
+
+		# Debian - Linux Mint 
 		printf "Linux Mint\n"; DebianOperation;
+
 	}; elif lsb_release -i | grep 'ManjaroLinux' >> $log; then {
+
+		# Arch - Manjaro 
 		printf "Manjaro Linux\n"; ArchOperation;
+
 	}; elif lsb_release -i | grep 'Ubuntu' >> $log; then {
+
+		# Debian - Ubuntu
 		printf "Ubuntu\n"; DebianOperation;
+
+	}; elif lsb_release -i | grep 'Arch' >> $log; then {
+
+		# Arch - Arch Linux 
+		printf "Arch Linux\n"; ArchOperation;
+
+=======
 	}; elif uname -a | grep 'Android' >> $log; then {
 		printf "Android\n"; AndroidOperation;
 	}; else {
-		sleep 0.5; printf "Failed\n";
+		sleep 0.5; printf "Failed to locate distro\n";
 	}; fi; printf "$stop"
 }
 
