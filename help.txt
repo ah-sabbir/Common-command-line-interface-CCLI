@@ -1,33 +1,39 @@
 CCLI                                           User Commands                                           
 
 NAME
-       CCLI - simple script for beginners to run one command in any linux distro
+    	CCLI - simple script for beginners to run one command in any linux distro
 
 DESCRIPTION
 
-	install ~ to install a package		ex ~ install <package-name>
+		install ~ to install a package  		ex ~ install <package-name>
 
-	remove ~ to remove/install a package	ex ~ remove <package-name>
+		remove ~ to remove/install a package	ex ~ remove <package-name>
 
-	sync ~ to update/sync distro repository	
+		sync ~ to update/sync distro repository	
 
-	upgrade ~ to upgrade all of package	
-	
-	help ~ for get help
+		upgrade ~ to upgrade all of package	
+
+		help ~ for get help
+
+		clean-cache ~ Clean up all local cache 	ex ~ clean-cache and hit enter
+
+		please ~ added for fun please works replace of sudo command 	ex ~ please install toilet and hit enter
 
 
 AUTHOR
-       Open source
+       Farhan Sadik
 
 REPORTING BUGS
-       Report any bugs to <https://github.com/ahsabbir103/Common-command-line-interface-CCLI/issues>
-	or 
+	   Report any bugs to <https://github.com/ahsabbir103/Common-command-line-interface-CCLI/issues>
+	   or 
+	   mail me @ farhansadikriduan@gmail.com
+	
 
 COPYRIGHT
-       This  is  free software: you are free to change and redistribute it.  There is NO WARRANTY, to the ex‐
+       This is free software: you are free to change and redistribute it. There is NO WARRANTY, to the ex‐
        tent permitted by law.
 
 SEE ALSO
        Full documentation <https://github.com/ahsabbir103/Common-command-line-interface-CCLI/wiki>
 
-                               May 2019                                            CCLI
+                               Nov 2019                                            CCLI
