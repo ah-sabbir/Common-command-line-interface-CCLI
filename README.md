@@ -49,19 +49,35 @@ After update please close your terminal and open it again
  7. **please** ~ added for fun <br>
  `please` works replace of **sudo** command <br>
  example ~ `please install toilet` and hit enter 
- 
+
+## Git Keywords 
+ 1. **commit**  ~ to commit  <br>
+ example ~ ```commit -m "hell yeah" filename.txt```
+
+ 2. **status** ~ to view status  <br>
+ example ~ ```status```
+
+ 3. **branch** ~  to view list of branch <br>
+ example ~ ```branch```
+
+ 4. **push** ~ push repo <br>
+ example ~ ```push```
+
+ 5. **pull** ~ pull repo <br>
+ example ~ ```pull```
+
 ## Support 
  1. Supported Arch Linux and Arch Linux Based Distro
      * tested on **manjaro**, **antergos**, **arch**
  2. Supported Debian and Debian Based Distro
      * tested on **ubuntu** and **linux mint**
  3. Supported Android and Android Based OS (**Termux**)
-     * tested on **Android Pie** and **Android x86** 
+     * tested on **Android Pie**, **Android x86 Project**, **Phoenix OS**
      * Note ~ Works only with **termux** app on android
      
 ## Not Supported 
- 1. We added **openSUSE** configuration. Not installed it on `install` script. You can install **openSUSE** config manually. 
- 2. We added **RedHat** and **Feadora** configuration. Not installed it on `install` script. You can install those config manually. 
+ 1. We added **openSUSE**, **RedHat** and **Feadora** configuration.You'll have to install those manually based on your distros. For manual configuration please re-edit `suse.cfg` and `redhat.cfg` file. <br>
+ > `redhat.cfg` is for both **RedHat** and **Feadora**.
 
 ## Develpoment
 **Created By,** 
