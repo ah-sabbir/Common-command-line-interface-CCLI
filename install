@@ -49,7 +49,7 @@ function AndroidOperation() {
 }
 function DebianOperation() {
 	if printf "$yellow" && printf "Cloning Configuration : $red"; then {
-		if less $termux_configuration >> $pc_config; then {
+		if less $debian_configuration >> $pc_config; then {
 			printf "Done$stop\n";
 		}; fi
 	}; fi;
@@ -81,7 +81,6 @@ function DistroOperation() {
 		# Arch - Arch Linux 
 		printf "Arch Linux\n"; ArchOperation;
 
-=======
 	}; elif uname -a | grep 'Android' >> $log; then {
 		printf "Android\n"; AndroidOperation;
 	}; else {
