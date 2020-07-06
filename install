@@ -5,17 +5,14 @@ set import bash from busybox
 set import zsh from busybox
 set import git 
 
-script_version="0.1.1 Alpha"; # 0.1.09 Alpha
+script_version="1.0 Stable"; # 0.1.09 Alpha
 
-# define variable 
-=======
 # define variable
 red='\033[1;91m'; deep_green='\033[0;32m'; green='\033[1;92m'; yellow='\033[1;93m'; blue='\033[1;94m'; white='\033[1;97m'; stop='\e[0m';
 arch_configuration=arch.cfg
 debian_configuration=deb.cfg
 termux_configuration=termux.cfg
 help=help.txt
-script_version="1.0 Stable";
 
 # log files
 log=~/.config/ccli/data.log
@@ -76,7 +73,7 @@ function DistroOperation() {
 		# Debian - Ubuntu
 		printf "Ubuntu\n"; DebianOperation;
 
-	}; elif lsb_release -i | grep 'Arch' >> $log; then {
+	}; elif uname -a | grep 'arch' >> $log; then {
 
 		# Arch - Arch Linux 
 		printf "Arch Linux\n"; ArchOperation;
