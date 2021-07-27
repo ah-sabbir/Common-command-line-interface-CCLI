@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_version="2.0 Stable"; # 1.0 Stable
+script_version="2.3 Stable"; # 1.0 Stable
 
 # define variable
 arch_cfg=arch.cfg
@@ -17,14 +17,23 @@ function distro_operation() {
 	debian=`cat /etc/*release | grep "^ID_LIKE=debian"`
 	ubuntu=`cat /etc/*release | grep "^ID_LIKE=ubuntu"`
 	arch=`cat /etc/*release | grep "^ID_LIKE=arch"`
-
+	default_shell=`echo "$SHELL"`;
 
 	if [[ $os_version == "ID=fedora" ]]; then {
 		
 		echo "Name of Distribution  : Fedora"
 		printf "Searching File        : "
 		if [[ `ls -a | grep $fedora_cfg` == $fedora_cfg  ]] ; then {
-			printf "Found\nCloning Configuration : "; cat $fedora_cfg >> $ZRC && cat $fedora_cfg >> $BRC; printf "Done\n";
+
+			printf "Found\nDefault Shell         : ";
+			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
+				printf "ZSH\nCloning Configuration : "; cat $fedora_cfg >> $ZRC; printf "Done\n";
+			} 
+			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
+				printf "Bash\nCloning Configuration : "; cat $fedora_cfg >> $BRC; printf "Done\n";
+			} 
+			else printf "Failed\n"; fi
+
 		} else echo "sorry no $input has been found"; 
 		fi
 
@@ -34,7 +43,16 @@ function distro_operation() {
 		echo "Name of Distribution  : Arch Linux or Arch Linux Based Distribution"
 		printf "Searching File        : "
 		if [[ `ls -a | grep $arch_cfg` == $arch_cfg  ]] ; then {
-			printf "Found\nCloning Configuration : "; cat $arch_cfg >> $ZRC && cat $arch_cfg >> $BRC; printf "Done\n";
+
+			printf "Found\nDefault Shell         : ";
+			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
+				printf "ZSH\nCloning Configuration : "; cat $arch_cfg >> $ZRC; printf "Done\n";
+			} 
+			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
+				printf "Bash\nCloning Configuration : "; cat $arch_cfg >> $BRC; printf "Done\n";
+			} 
+			else printf "Failed\n"; fi
+
 		} else echo "sorry no $input has been found"; 
 		fi
 
@@ -44,7 +62,16 @@ function distro_operation() {
 		echo "Name of Distribution  : Ubuntu or Ubuntu Based Linux Distribution"
 		printf "Searching File        : "
 		if [[ `ls -a | grep $debian_cfg` == $debian_cfg  ]] ; then {
-			printf "Found\nCloning Configuration : "; cat $debian_cfg >> $ZRC && cat $debian_cfg >> $BRC; printf "Done\n";
+
+			printf "Found\nDefault Shell         : ";
+			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
+				printf "ZSH\nCloning Configuration : "; cat $debian_cfg >> $ZRC; printf "Done\n";
+			} 
+			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
+				printf "Bash\nCloning Configuration : "; cat $debian_cfg >> $BRC; printf "Done\n";
+			} 
+			else printf "Failed\n"; fi
+
 		} else echo "sorry no $input has been found"; 
 		fi
 
@@ -54,7 +81,16 @@ function distro_operation() {
 		echo "Name of Distribution  : Debian Based Linux Distribution"
 		printf "Searching File        : "
 		if [[ `ls -a | grep $debian_cfg` == $debian_cfg  ]] ; then {
-			printf "Found\nCloning Configuration : "; cat $debian_cfg >> $ZRC && cat $debian_cfg >> $BRC; printf "Done\n";
+
+			printf "Found\nDefault Shell         : ";
+			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
+				printf "ZSH\nCloning Configuration : "; cat $debian_cfg >> $ZRC; printf "Done\n";
+			} 	
+			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
+				printf "Bash\nCloning Configuration : "; cat $debian_cfg >> $BRC; printf "Done\n";
+			} 
+			else printf "Failed\n"; fi
+
 		} else echo "sorry no $input has been found"; 
 		fi
 		
@@ -64,7 +100,14 @@ function distro_operation() {
 		echo "Name of Distribution  : Android OS [Termux Environment]"
 		printf "Searching File        : "
 		if [[ `ls -a | grep $termux_cfg` == $termux_cfg  ]] ; then {
-			printf "Found\nCloning Configuration : "; cat $termux_cfg >> $ZRC && cat $termux_cfg >> $BRC; printf "Done\n";
+
+			printf "Found\nDefault Shell         : ";
+			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
+				printf "ZSH\nCloning Configuration : "; cat $termux_cfg >> $ZRC; printf "Done\n";
+			} elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
+				printf "Bash\nCloning Configuration : "; cat $termux_cfg >> $BRC; printf "Done\n";
+			} else printf "Failed\n"; fi
+
 		} else echo "sorry no $input has been found"; 
 		fi
 		
