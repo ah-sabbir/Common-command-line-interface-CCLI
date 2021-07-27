@@ -1,113 +1,137 @@
 #!/bin/bash
 
-set import busybox 
-set import bash from busybox
-set import zsh from busybox
-set import git 
+script_version="2.11 Stable"; # 1.0 Stable
 
-script_version="0.1.1 Alpha"; # 0.1.09 Alpha
-
-# define variable 
-=======
 # define variable
-red='\033[1;91m'; deep_green='\033[0;32m'; green='\033[1;92m'; yellow='\033[1;93m'; blue='\033[1;94m'; white='\033[1;97m'; stop='\e[0m';
-arch_configuration=arch.cfg
-debian_configuration=deb.cfg
-termux_configuration=termux.cfg
-help=help.txt
-script_version="1.0 Stable";
+arch_cfg=arch.cfg
+debian_cfg=deb.cfg
+termux_cfg=termux.cfg
+fedora_cfg=fedora.cfg
 
-# log files
-log=~/.config/ccli/data.log
-config=~/.config/ccli/
-pc_config=~/.config/ccli/pc_config.cfg
+ZRC=$HOME/.zshrc
+BRC=$HOME/.bashrc
 
-function FileOperation() {
-	if printf "$yellow" && printf "Creating Folder       : $red"; then {
-		if mkdir ~/.config/ccli; then {
-			printf "Done\n$stop"
-		}; fi
-	}; fi
-	if printf "$yellow" && printf "Creating Files        : $red"; then {
-		touch $pc_config && printf "Done\n$stop";
-	}; fi
+function distro_operation() {
+
+	os_version=`cat /etc/os-release | grep "^ID"`
+	debian=`cat /etc/os-release | grep "^ID_LIKE=debian"`
+	ubuntu=`cat /etc/os-release | grep "^ID_LIKE=ubuntu"`
+	arch=`cat /etc/os-release | grep "^ID_LIKE=arch"`
+	default_shell=`echo "$SHELL"`;
+
+	if [[ $os_version == "ID=fedora" ]]; then {
+		
+		echo "Name of Distribution  : Fedora"
+		printf "Searching File        : "
+		if [[ `ls -a | grep $fedora_cfg` == $fedora_cfg  ]] ; then {
+
+			printf "Found\nDefault Shell         : ";
+			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
+				printf "ZSH\nCloning Configuration : "; cat $fedora_cfg >> $ZRC; printf "Done\n";
+			} 
+			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
+				printf "Bash\nCloning Configuration : "; cat $fedora_cfg >> $BRC; printf "Done\n";
+			} 
+			else printf "Failed\n"; fi
+
+		} else echo "sorry no $input has been found"; 
+		fi
+
+	} 
+	elif [[ $os_version == "ID=arch" || $arch == "ID_LIKE=arch" ]]; then {
+
+		echo "Name of Distribution  : Arch Linux or Arch Linux Based Distribution"
+		printf "Searching File        : "
+		if [[ `ls -a | grep $arch_cfg` == $arch_cfg  ]] ; then {
+
+			printf "Found\nDefault Shell         : ";
+			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
+				printf "ZSH\nCloning Configuration : "; cat $arch_cfg >> $ZRC; printf "Done\n";
+			} 
+			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
+				printf "Bash\nCloning Configuration : "; cat $arch_cfg >> $BRC; printf "Done\n";
+			} 
+			else printf "Failed\n"; fi
+
+		} else echo "sorry no $input has been found"; 
+		fi
+
+	} 
+	elif [[ $os_version == "ID=ubuntu" || $ubuntu == "ID_LIKE=ubuntu" ]]; then {
+
+		echo "Name of Distribution  : Ubuntu or Ubuntu Based Linux Distribution"
+		printf "Searching File        : "
+		if [[ `ls -a | grep $debian_cfg` == $debian_cfg  ]] ; then {
+
+			printf "Found\nDefault Shell         : ";
+			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
+				printf "ZSH\nCloning Configuration : "; cat $debian_cfg >> $ZRC; printf "Done\n";
+			}
+			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
+				printf "Bash\nCloning Configuration : "; cat $debian_cfg >> $BRC; printf "Done\n";
+			} 
+			else printf "Failed\n"; fi
+
+		} else echo "sorry no $input has been found"; 
+		fi
+
+	} 
+	elif [[ $debian == "ID_LIKE=debian" ]]; then {
+
+		echo "Name of Distribution  : Debian Based Linux Distribution"
+		printf "Searching File        : "
+		if [[ `ls -a | grep $debian_cfg` == $debian_cfg  ]] ; then {
+
+			printf "Found\nDefault Shell         : ";
+			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
+				printf "ZSH\nCloning Configuration : "; cat $debian_cfg >> $ZRC; printf "Done\n";
+			} 	
+			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
+				printf "Bash\nCloning Configuration : "; cat $debian_cfg >> $BRC; printf "Done\n";
+			} 
+			else printf "Failed\n"; fi
+
+		} else echo "sorry no $input has been found"; 
+		fi
+		
+	} 
+	elif [[ `uname -o` == "Android" ]] ; then {
+
+		termux_bash=/data/data/com.termux/files/usr/bin/bash 
+		termux_zsh=/data/data/com.termux/files/usr/bin/zsh
+
+		echo "Name of Distribution  : Android OS [Termux Environment]"
+		printf "Searching File        : "
+		if [[ `ls -a | grep $termux_cfg` == $termux_cfg  ]] ; then {
+
+			printf "Found\nDefault Shell         : ";
+			if [[ $default_shell == $termux_bash || $default_shell == $termux_bash ]]; then {
+				printf "ZSH\nCloning Configuration : "; cat $termux_cfg >> $ZRC; printf "Done\n";
+			} 
+			elif [[ $default_shell == $termux_zsh || $default_shell == $termux_zsh ]]; then {
+				printf "Bash\nCloning Configuration : "; cat $termux_cfg >> $BRC; printf "Done\n";
+			} 
+			else printf "Failed\n"; fi
+
+		} else echo "sorry no $input has been found"; 
+		fi
+		
+	}
+	else echo "Failed to detect any distro"; fi
 }
-function ArchOperation() {
-	# 
-	if printf "$yellow" && printf "Cloning Configuration : $red"; then {
-		if less $arch_configuration >> $pc_config; then {
-			printf "Done$stop\n";
-		}; fi
-	}; fi;
-}
-function AndroidOperation() {
-	if printf "$yellow" && printf "Cloning Configuration : $red"; then {
-		if less $termux_configuration >> $pc_config; then {
-			printf "Done$stop\n";
-		}; fi
-	}; fi;
-}
-function DebianOperation() {
-	if printf "$yellow" && printf "Cloning Configuration : $red"; then {
-		if less $debian_configuration >> $pc_config; then {
-			printf "Done$stop\n";
-		}; fi
-	}; fi;
-}
-function DistroOperation() {
-	printf "$yellow" && printf "Searching for distro  : $red"
-	if lsb_release -i | grep 'Antergos' >> $log; then {
 
-		# Arch - Antergos 
-		printf "Antergos Linux\n"; ArchOperation;
-
-	}; elif lsb_release -i | grep 'LinuxMint' >> $log; then {
-
-		# Debian - Linux Mint 
-		printf "Linux Mint\n"; DebianOperation;
-
-	}; elif lsb_release -i | grep 'ManjaroLinux' >> $log; then {
-
-		# Arch - Manjaro 
-		printf "Manjaro Linux\n"; ArchOperation;
-
-	}; elif lsb_release -i | grep 'Ubuntu' >> $log; then {
-
-		# Debian - Ubuntu
-		printf "Ubuntu\n"; DebianOperation;
-
-	}; elif lsb_release -i | grep 'Arch' >> $log; then {
-
-		# Arch - Arch Linux 
-		printf "Arch Linux\n"; ArchOperation;
-
-	}; elif uname -a | grep 'Android' >> $log; then {
-		printf "Android\n"; AndroidOperation;
-	}; else {
-		sleep 0.5; printf "Failed to locate distro\n";
-	}; fi; printf "$stop"
-}
-
-main() {
-	printf "$green" && printf "CCLi$yellow v$script_version$red";
+red='\033[1;91m'; green='\033[1;92m'; yellow='\033[1;93m'; stop='\e[0m';
+echo 
+printf "$green" && printf "CCLi$yellow v$script_version$red";
 	echo "
   ____ ____ _     _
  / ___/ ___| |   (_)
 | |  | |   | |   | |
 | |__| |___| |___| |
  \____\____|_____|_|
-	"; printf "$stop";
+	"; printf "$stop"; echo && distro_operation; echo 
 
-	FileOperation && DistroOperation;
-	printf "$yellow" && printf "Copyting Files        : $red";
-	if less $pc_config >> ~/.bashrc; then printf "Done\n$stop"; fi;
-	printf "$yellow" && printf "Copyting Files        : $red";
-	if less $pc_config >> ~/.zshrc; then printf "Done\n$stop"; fi;
 
-	printf "$yellow" && printf "Copyting Folder       : $red";
-	if cp -rfv $help $config >> $log; then printf "Done\n$stop"; fi;
-	printf "$yellow" && printf "Getting Permision     : $red";
-	if cd $config; then chmod +x $help && printf "Done\n$stop"; fi; # help (chmod) - sometimes some of distro failed to run
-}
-
-main
+## Script By Farhan Sadik
+## July 2021 
+### Square Development Group
