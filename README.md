@@ -1,6 +1,8 @@
 # CCLI 
 ### Common Command Line Interface
 
+> This project only work with **bash** and **zsh** only. After install please reopen your terminal.
+
 **Installation**
 
 ```bash 

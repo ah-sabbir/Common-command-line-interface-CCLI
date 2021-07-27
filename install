@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_version="2.5 Stable"; # 1.0 Stable
+script_version="2.6 Stable"; # 1.0 Stable
 
 # define variable
 arch_cfg=arch.cfg
@@ -144,7 +144,7 @@ function distro_operation() {
 }
 
 red='\033[1;91m'; green='\033[1;92m'; yellow='\033[1;93m'; stop='\e[0m';
-
+echo 
 printf "$green" && printf "CCLi$yellow v$script_version$red";
 	echo "
   ____ ____ _     _
@@ -152,7 +152,7 @@ printf "$green" && printf "CCLi$yellow v$script_version$red";
 | |  | |   | |   | |
 | |__| |___| |___| |
  \____\____|_____|_|
-	"; printf "$stop"; echo && distro_operation; 
+	"; printf "$stop"; echo && distro_operation; echo 
 
 
 ## Script By Farhan Sadik
