@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_version="2.3 Stable"; # 1.0 Stable
+script_version="2.4 Stable"; # 1.0 Stable
 
 # define variable
 arch_cfg=arch.cfg
@@ -28,9 +28,15 @@ function distro_operation() {
 			printf "Found\nDefault Shell         : ";
 			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
 				printf "ZSH\nCloning Configuration : "; cat $fedora_cfg >> $ZRC; printf "Done\n";
+				printf "Updating RC Files     : "
+				source $ZRC
+				printf "Done\n"
 			} 
 			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
 				printf "Bash\nCloning Configuration : "; cat $fedora_cfg >> $BRC; printf "Done\n";
+				printf "Updating RC Files     : "
+				source $BRC
+				printf "Done\n"
 			} 
 			else printf "Failed\n"; fi
 
@@ -47,9 +53,13 @@ function distro_operation() {
 			printf "Found\nDefault Shell         : ";
 			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
 				printf "ZSH\nCloning Configuration : "; cat $arch_cfg >> $ZRC; printf "Done\n";
+				printf "Updating RC Files     : "
+				if source $ZRC; then printf "Done\n"; fi
 			} 
 			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
 				printf "Bash\nCloning Configuration : "; cat $arch_cfg >> $BRC; printf "Done\n";
+				printf "Updating RC Files     : "
+				if source $BRC; then printf "Done\n"; fi
 			} 
 			else printf "Failed\n"; fi
 
@@ -66,9 +76,15 @@ function distro_operation() {
 			printf "Found\nDefault Shell         : ";
 			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
 				printf "ZSH\nCloning Configuration : "; cat $debian_cfg >> $ZRC; printf "Done\n";
+				printf "Updating RC Files     : "
+				source $ZRC
+				printf "Done\n"
 			} 
 			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
 				printf "Bash\nCloning Configuration : "; cat $debian_cfg >> $BRC; printf "Done\n";
+				printf "Updating RC Files     : "
+				source $BRC
+				printf "Done\n"
 			} 
 			else printf "Failed\n"; fi
 
@@ -85,9 +101,15 @@ function distro_operation() {
 			printf "Found\nDefault Shell         : ";
 			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
 				printf "ZSH\nCloning Configuration : "; cat $debian_cfg >> $ZRC; printf "Done\n";
+				printf "Updating RC Files     : "
+				source $ZRC
+				printf "Done\n"
 			} 	
 			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
 				printf "Bash\nCloning Configuration : "; cat $debian_cfg >> $BRC; printf "Done\n";
+				printf "Updating RC Files     : "
+				source $BRC
+				printf "Done\n"
 			} 
 			else printf "Failed\n"; fi
 
@@ -104,8 +126,14 @@ function distro_operation() {
 			printf "Found\nDefault Shell         : ";
 			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
 				printf "ZSH\nCloning Configuration : "; cat $termux_cfg >> $ZRC; printf "Done\n";
+				printf "Updating RC Files     : "
+				source $ZRC
+				printf "Done\n"
 			} elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
 				printf "Bash\nCloning Configuration : "; cat $termux_cfg >> $BRC; printf "Done\n";
+				printf "Updating RC Files     : "
+				source $BRC
+				printf "Done\n"
 			} else printf "Failed\n"; fi
 
 		} else echo "sorry no $input has been found"; 
@@ -126,5 +154,7 @@ printf "$green" && printf "CCLi$yellow v$script_version$red";
  \____\____|_____|_|
 	"; printf "$stop"; echo && distro_operation; 
 
-printf "Updating RC Files     : "
-if source $ZRC && source $BRC; then printf "Done\n"; fi
+
+## Script By Farhan Sadik
+## July 2021 
+### Square Development Group
