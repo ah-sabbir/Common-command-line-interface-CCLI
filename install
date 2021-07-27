@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_version="2.4 Stable"; # 1.0 Stable
+script_version="2.5 Stable"; # 1.0 Stable
 
 # define variable
 arch_cfg=arch.cfg
@@ -13,10 +13,10 @@ BRC=$HOME/.bashrc
 
 function distro_operation() {
 
-	os_version=`cat /etc/*release | grep "^ID"`
-	debian=`cat /etc/*release | grep "^ID_LIKE=debian"`
-	ubuntu=`cat /etc/*release | grep "^ID_LIKE=ubuntu"`
-	arch=`cat /etc/*release | grep "^ID_LIKE=arch"`
+	os_version=`cat /etc/os-release | grep "^ID"`
+	debian=`cat /etc/os-release | grep "^ID_LIKE=debian"`
+	ubuntu=`cat /etc/os-release | grep "^ID_LIKE=ubuntu"`
+	arch=`cat /etc/os-release | grep "^ID_LIKE=arch"`
 	default_shell=`echo "$SHELL"`;
 
 	if [[ $os_version == "ID=fedora" ]]; then {
