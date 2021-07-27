@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_version="2.7 Stable"; # 1.0 Stable
+script_version="2.8 Stable"; # 1.0 Stable
 
 # define variable
 arch_cfg=arch.cfg
@@ -95,7 +95,7 @@ function distro_operation() {
 		fi
 		
 	} 
-	elif uname -a | grep 'Android'; then {
+	elif [[ ``uname -o` == "Android" ]] ; then {
 
 		echo "Name of Distribution  : Android OS [Termux Environment]"
 		printf "Searching File        : "
