@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_version="2.12 Stable"; # 1.0 Stable
+script_version="2.13 Stable"; # 1.0 Stable
 
 # define variable
 arch_cfg=arch.cfg
@@ -106,10 +106,10 @@ function distro_operation() {
 
 			printf "Found\nDefault Shell         : ";
 			if [[ $default_shell == $termux_bash || $default_shell == $termux_bash ]]; then {
-				printf "ZSH\nCloning Configuration : "; cat $termux_cfg >> $BRC; printf "Done\n";
+				printf "Bash\nCloning Configuration : "; cat $termux_cfg >> $BRC; printf "Done\n";
 			} 
 			elif [[ $default_shell == $termux_zsh || $default_shell == $termux_zsh ]]; then {
-				printf "Bash\nCloning Configuration : "; cat $termux_cfg >> $ZRC; printf "Done\n";
+				printf "ZSH\nCloning Configuration : "; cat $termux_cfg >> $ZRC; printf "Done\n";
 			} 
 			else printf "Failed\n"; fi
 
