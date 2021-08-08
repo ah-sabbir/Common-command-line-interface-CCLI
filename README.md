@@ -59,10 +59,11 @@ After update please close your terminal and open it again
  1. Supported Arch Linux Based distribution
      * Tested on **manjaro**, **arch linux**
  2. Supported Debian Based distribution
-     * Tested on **ubuntu, linux mint and kali linux**
+     * Tested on **ubuntu, linux mint, elementary os and kali linux**
  3. Supported Android Based OS (**Termux Environment**)
      * tested on **Android R**, **Android x86 Project**, **Phoenix OS**
      * Note ~ Works only with **termux** app on android
+ 4. Also supported on **fedora workstation**
 
 ## Development
 **Created By,** 
