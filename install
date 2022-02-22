@@ -1,12 +1,14 @@
 #!/bin/bash
 
-script_version="2.13 Stable"; # 1.0 Stable
+script_version="2.14 Stable"; # 2.13 Stable
 
 # define variable
 arch_cfg=arch.cfg
 debian_cfg=deb.cfg
 termux_cfg=termux.cfg
 fedora_cfg=fedora.cfg
+
+man_file=man-ccli
 
 ZRC=$HOME/.zshrc
 BRC=$HOME/.bashrc
@@ -120,6 +122,20 @@ function distro_operation() {
 	else echo "Failed to detect any distro"; fi
 }
 
+function manual_page_install() {
+	if cd `pwd`; then {
+		printf "Searching Manual Page : "
+		if [[ `ls -a | grep $man_file` == $man_file  ]] ; then {
+			printf "Found\n"; 
+			printf "Copying Manual Page   : "
+			cp $man_file ~/.config/
+			printf "Done\n";
+		} else echo "sorry no $man_file has been found"; 
+		fi
+	} else echo "[x] error : no location found"; fi
+}
+
+
 red='\033[1;91m'; green='\033[1;92m'; yellow='\033[1;93m'; stop='\e[0m';
 echo 
 printf "$green" && printf "CCLi$yellow v$script_version$red";
@@ -129,9 +145,12 @@ printf "$green" && printf "CCLi$yellow v$script_version$red";
 | |  | |   | |   | |
 | |__| |___| |___| |
  \____\____|_____|_|
-	"; printf "$stop"; echo && distro_operation; echo 
+	"; printf "$stop"; 
+echo && distro_operation; 
+manual_page_install;
+echo 
 
 
 ## Script By Farhan Sadik
-## July 2021 
+## February 2022
 ### Square Development Group

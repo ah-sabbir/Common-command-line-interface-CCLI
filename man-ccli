@@ -1,0 +1,11 @@
+|---------------------------------------------------|
+|  Syntax       |  Description                      |
+|---------------+-----------------------------------|
+|  install or i |  install <package-name>           |
+|  remove or r  |  remove <package-name>            |
+|  sync or u    |  to update/sync distro repository |
+|  upgrade      |  to upgrade all of package        |
+|  clean-cache  |  Clean up all local caches        |
+|---------------+-----------------------------------|
+|  man-ccli     |  view manual for ccli             |
+|---------------------------------------------------|
