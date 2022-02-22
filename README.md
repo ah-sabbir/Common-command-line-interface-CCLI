@@ -35,7 +35,7 @@ After update please close your terminal and open it again
  3. **sync** or **u** ~ to update/sync distro repository <br>
  example ~ type ```sync``` or `u`
 
- 4. **upgrade** or **u**~ to upgrade all of package <br>
+ 4. **upgrade** ~ to upgrade all of package <br>
  example ~ type ```upgrade``` or `u`
 
  6. **clean-cache** ~ Clean up all local caches <br>
