@@ -63,7 +63,8 @@ After update please close your terminal and open it again
  3. Supported Android Based OS (**Termux Environment**)
      * tested on **Android R**, **Android x86 Project**, **Phoenix OS**
      * Note ~ Works only with **termux** app on android
- 4. Also supported on **fedora workstation**
+ 4. Supported on Red Hat and Fedora.
+ 	 * tested on **fedora workstation**, **red hat enterprise 9**
 
 ## Development
 **Created By,** 

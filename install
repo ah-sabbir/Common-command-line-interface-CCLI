@@ -1,15 +1,14 @@
 #!/bin/bash
+#!/usr/bin/bash
 
-script_version="2.14 Stable"; # 2.13 Stable
+script_version="2.15 Stable";
 
-# define variable
+# variable
 arch_cfg=arch.cfg
 debian_cfg=deb.cfg
 termux_cfg=termux.cfg
 fedora_cfg=fedora.cfg
-
 man_file=man-ccli
-
 ZRC=$HOME/.zshrc
 BRC=$HOME/.bashrc
 
@@ -21,7 +20,7 @@ function distro_operation() {
 	arch=`cat /etc/os-release | grep "^ID_LIKE=arch"`
 	default_shell=`echo "$SHELL"`;
 
-	if [[ $os_version == "ID=fedora" ]]; then {
+	if [[ $os_version == "ID=fedora" || `cat /etc/os-release | grep '^ID="rhel"'` == 'ID="rhel"' ]]; then {
 		
 		echo "Name of Distribution  : Fedora"
 		printf "Searching File        : "
@@ -152,5 +151,5 @@ echo
 
 
 ## Script By Farhan Sadik
-## February 2022
+## August 2023
 ### Square Development Group
