@@ -1,49 +1,50 @@
 #!/bin/bash
 #!/usr/bin/bash
 
-script_version="2.15 Stable";
+script_version="2.16 Stable";
 
 # variable
 arch_cfg=arch.cfg
 debian_cfg=deb.cfg
 termux_cfg=termux.cfg
-fedora_cfg=fedora.cfg
+rhel_cfg=rhel.cfg
 man_file=man-ccli
 ZRC=$HOME/.zshrc
 BRC=$HOME/.bashrc
 
 function distro_operation() {
 
-	os_version=`cat /etc/os-release | grep "^ID"`
-	debian=`cat /etc/os-release | grep "^ID_LIKE=debian"`
-	ubuntu=`cat /etc/os-release | grep "^ID_LIKE=ubuntu"`
-	arch=`cat /etc/os-release | grep "^ID_LIKE=arch"`
-	default_shell=`echo "$SHELL"`;
+	os_version=$(cat /etc/os-release | grep "^ID");
+	debian=$(cat /etc/os-release | grep "^ID_LIKE=debian");
+	ubuntu=$(cat /etc/os-release | grep "^ID_LIKE=ubuntu");
+	arch=$(cat /etc/os-release | grep "^ID_LIKE=arch");
+	default_shell=$(echo "$SHELL");
 
-	if [[ $os_version == "ID=fedora" || `cat /etc/os-release | grep '^ID="rhel"'` == 'ID="rhel"' ]]; then {
+	# rhel and rhel based distribution 
+	if [[ $os_version == "ID=fedora" || $(cat /etc/os-release | grep '^ID="rhel"') == 'ID="rhel"' || $(cat /etc/os-release | grep 'ID="rocky"') == 'ID="rocky"' ]]; then {
 		
-		echo "Name of Distribution  : Fedora"
+		echo "Name of Distribution  : Red Hat Enterprise Linux"
 		printf "Searching File        : "
-		if [[ `ls -a | grep $fedora_cfg` == $fedora_cfg  ]] ; then {
+		if [[ $(ls | grep $rhel_cfg) == $rhel_cfg  ]] ; then {
 
 			printf "Found\nDefault Shell         : ";
 			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
-				printf "ZSH\nCloning Configuration : "; cat $fedora_cfg >> $ZRC; printf "Done\n";
+				printf "ZSH\nCloning Configuration : "; cat $rhel_cfg >> $ZRC; printf "Done\n";
 			} 
 			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
-				printf "Bash\nCloning Configuration : "; cat $fedora_cfg >> $BRC; printf "Done\n";
+				printf "Bash\nCloning Configuration : "; cat $rhel_cfg >> $BRC; printf "Done\n";
 			} 
-			else printf "Failed\n"; fi
+			else printf "Failed\n"; fi;
 
-		} else echo "sorry no $input has been found"; 
-		fi
+		} else echo "sorry no$input has been found"; 
+		fi;
 
 	} 
 	elif [[ $os_version == "ID=arch" || $arch == "ID_LIKE=arch" ]]; then {
 
 		echo "Name of Distribution  : Arch Linux or Arch Linux Based Distribution"
 		printf "Searching File        : "
-		if [[ `ls -a | grep $arch_cfg` == $arch_cfg  ]] ; then {
+		if [[ $(ls -a | grep $arch_cfg) == $arch_cfg  ]] ; then {
 
 			printf "Found\nDefault Shell         : ";
 			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
@@ -60,9 +61,9 @@ function distro_operation() {
 	} 
 	elif [[ $os_version == "ID=ubuntu" || $ubuntu == "ID_LIKE=ubuntu" ]]; then {
 
-		echo "Name of Distribution  : Ubuntu or Ubuntu Based Linux Distribution"
-		printf "Searching File        : "
-		if [[ `ls -a | grep $debian_cfg` == $debian_cfg  ]] ; then {
+		echo "Name of Distribution  : Ubuntu or Ubuntu Based Linux Distribution";
+		printf "Searching File        : ";
+		if [[ $(ls -a | grep $debian_cfg) == $debian_cfg  ]] ; then {
 
 			printf "Found\nDefault Shell         : ";
 			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
@@ -71,17 +72,17 @@ function distro_operation() {
 			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
 				printf "Bash\nCloning Configuration : "; cat $debian_cfg >> $BRC; printf "Done\n";
 			} 
-			else printf "Failed\n"; fi
+			else printf "Failed\n"; fi;
 
 		} else echo "sorry no $input has been found"; 
-		fi
+		fi;
 
 	} 
 	elif [[ $debian == "ID_LIKE=debian" ]]; then {
 
 		echo "Name of Distribution  : Debian Based Linux Distribution"
 		printf "Searching File        : "
-		if [[ `ls -a | grep $debian_cfg` == $debian_cfg  ]] ; then {
+		if [[ $(ls -a | grep $debian_cfg) == $debian_cfg ]] ; then {
 
 			printf "Found\nDefault Shell         : ";
 			if [[ $default_shell == "/bin/zsh" || $default_shell == "/usr/bin/zsh" ]]; then {
@@ -90,20 +91,20 @@ function distro_operation() {
 			elif [[ $default_shell == "/bin/bash" || $default_shell == "/usr/bin/bash" ]]; then {
 				printf "Bash\nCloning Configuration : "; cat $debian_cfg >> $BRC; printf "Done\n";
 			} 
-			else printf "Failed\n"; fi
+			else printf "Failed\n"; fi;
 
 		} else echo "sorry no $input has been found"; 
 		fi
 		
 	} 
-	elif [[ `uname -o` == "Android" ]] ; then {
+	elif [[ $(uname -o) == "Android" ]] ; then {
 
 		termux_bash=/data/data/com.termux/files/usr/bin/bash 
 		termux_zsh=/data/data/com.termux/files/usr/bin/zsh
 
 		echo "Name of Distribution  : Android OS [Termux Environment]"
 		printf "Searching File        : "
-		if [[ `ls -a | grep $termux_cfg` == $termux_cfg  ]] ; then {
+		if [[ $(ls | grep $termux_cfg) == $termux_cfg  ]] ; then {
 
 			printf "Found\nDefault Shell         : ";
 			if [[ $default_shell == $termux_bash || $default_shell == $termux_bash ]]; then {
@@ -112,28 +113,28 @@ function distro_operation() {
 			elif [[ $default_shell == $termux_zsh || $default_shell == $termux_zsh ]]; then {
 				printf "ZSH\nCloning Configuration : "; cat $termux_cfg >> $ZRC; printf "Done\n";
 			} 
-			else printf "Failed\n"; fi
+			else printf "Failed\n"; fi;
 
 		} else echo "sorry no $input has been found"; 
-		fi
+		fi;
 		
 	}
 	else echo "Failed to detect any distro"; fi
 }
 
 function manual_page_install() {
-	if cd `pwd`; then {
+	if cd $(pwd); then {
 		printf "Searching Manual Page : "
-		if [[ `ls -a | grep $man_file` == $man_file  ]] ; then {
+		if [[ $(ls -a | grep $man_file) == $man_file  ]] ; then {
 			printf "Found\n"; 
-			printf "Copying Manual Page   : "
-			cp $man_file ~/.config/
+			printf "Copying Manual Page   : ";
+			cp $man_file ~/.config/;
 			printf "Done\n";
 		} else echo "sorry no $man_file has been found"; 
-		fi
-	} else echo "[x] error : no location found"; fi
+		fi;
+	} else echo "[x] error : no location found"; 
+	fi;
 }
-
 
 red='\033[1;91m'; green='\033[1;92m'; yellow='\033[1;93m'; stop='\e[0m';
 echo 
@@ -151,5 +152,5 @@ echo
 
 
 ## Script By Farhan Sadik
-## August 2023
-### Square Development Group
+### May 2024
+#### Square Development Group

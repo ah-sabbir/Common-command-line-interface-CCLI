@@ -5,24 +5,10 @@
 
 **Installation**
 
-```bash 
-$ git clone https://github.com/ahsabbir103/Common-command-line-interface-CCLI.git
-$ cd Common-command-line-interface-CCLI
-$ ./install
-```
+1. Clone Repository 
+2. Run Installer `./install`
 
-**Update CCLI**
-> **Note** 
-> Before update please remove all of alias from `*rc` files and then try to update 
-
-Copy and paste those commands on your terminal:
-
-```bash 
-$ cd Common-command-line-interface-CCLI
-$ git pull 
-$ ./install
-```
-After update please close your terminal and open it again
+After install please restart/re-login your terminal.
 
 **Keywords and Usages**
 
@@ -54,17 +40,17 @@ After update please close your terminal and open it again
   4. **pull** ~ pull repository 
   5. **log** ~ to view git log
 
-**Support**
+**Operating System Support**
 
  1. Supported Arch Linux Based distribution
-     * Tested on **manjaro**, **arch linux**
+     * Tested on **Arch Linux and Manjaro**
  2. Supported Debian Based distribution
-     * Tested on **ubuntu, linux mint, elementary os and kali linux**
+     * Tested on **Ubuntu, Linux Mint, ElementaryOS and Kali Linux**
  3. Supported Android Based OS (**Termux Environment**)
-     * tested on **Android R**, **Android x86 Project**, **Phoenix OS**
-     * Note ~ Works only with **termux** app on android
- 4. Supported on Red Hat and Fedora.
- 	 * tested on **fedora workstation**, **red hat enterprise 9**
+     * Tested on **Android R, Android x86 Project, Phoenix OS**
+> Note ~ Works only with **Termux** application on android
+ 4. Supported on Red Hat Enterprise Based Distribution.
+ 	 * Tested on **Fedora Workstation, Red Hat Enterprise 9, Rocky Linux 9**
 
 ## Development
 **Created By,** 
